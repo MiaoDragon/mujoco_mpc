@@ -76,6 +76,8 @@ add_library(
   tasks/swimmer/swimmer.h
   tasks/walker/walker.cc
   tasks/walker/walker.h
+  tasks/point_push/point_push.cc
+  tasks/point_push/point_push.h
   planners/planner.cc
   planners/planner.h
   planners/policy.h

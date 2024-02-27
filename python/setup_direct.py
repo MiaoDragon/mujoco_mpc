@@ -294,8 +294,7 @@ setuptools.setup(
     extras_require={
         "test": [
             "absl-py",
-            "mujoco >= 3.1.1",
-            "mujoco-mjx",
+            "mujoco >= 2.3.3",
         ],
     },
     ext_modules=[CMakeExtension("direct_server")],

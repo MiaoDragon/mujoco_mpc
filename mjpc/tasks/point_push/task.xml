@@ -1,0 +1,64 @@
+<mujoco model="Point Push Control">
+  <include file="../common.xml"/>
+  <!-- modified from: https://github.com/google-deepmind/dm_control/blob/main/dm_control/suite/point_mass.xml -->
+  <include file="point_push.xml" />
+
+  <!-- <size memory="10K"/> -->
+
+  <!-- <custom>
+    <numeric name="task_risk" data="1" />
+    <numeric name="agent_planner" data="0" />
+    <numeric name="agent_horizon" data="0.5" />
+    <numeric name="agent_timestep" data="0.01" />
+    <numeric name="agent_policy_width" data="0.0015" />
+    <numeric name="sampling_spline_points" data="5" />
+    <numeric name="sampling_exploration" data="0.01" />
+    <numeric name="gradient_spline_points" data="5" />
+  </custom> -->
+
+  <custom>
+    <!-- agent -->
+    <numeric name="agent_planner" data="2" />
+    <numeric name="agent_horizon" data="8" />
+    <numeric name="agent_timestep" data="0.01" />
+    <numeric name="agent_integrator" data="2" />
+    <numeric name="agent_policy_width" data="0.0015" />
+    <numeric name="sampling_spline_points" data="15" />
+    <numeric name="sampling_exploration" data="0.05" />
+    <numeric name="gradient_spline_points" data="15" />
+
+    <!-- estimator -->
+    <numeric name="estimator" data="0" />
+    <numeric name="estimator_sensor_start" data="2" />
+    <numeric name="estimator_number_sensor" data="8" />
+    <numeric name="estimator_timestep" data="0.0075" />
+    <numeric name="batch_configuration_length" data="3" />
+    <numeric name="batch_scale_prior" data="1.0e-3" />
+  </custom>
+
+  <worldbody>
+  <!-- when the goal is on the left of the object (when the point needs to relocate on the left,
+       the MPC seems to fail. It only is able to track the orientation in this case) -->
+    <body name="goal" mocap="true" pos="0.22 0.02 0.02" quat="0.9553365 0 0 0.2955202">
+        <geom type="box" size="0.01 0.03 0.02" contype="0" conaffinity="0" rgba="0 1 0 .5"/>
+    </body>
+  </worldbody>
+
+  <sensor>
+    <!-- <user name="Position" dim="2" user="0 5.0 0.0 10.0" /> -->
+    <!-- <user name="Velocity" dim="2" user="0 0.1 0.0 1.0" /> -->
+    <user name="Velocity" dim="3" user="0 0.1 0.0 1.0" />
+    <user name="Position" dim="3" user="2 0.1 0.0 1.0 0.04" />
+    <user name="Orientation" dim="3" user="0 0.1 0 10" />
+    <!-- <framepos name="trace0" objtype="site" objname="tip"/>
+    <framepos name="position" objtype="site" objname="tip"/>
+    <framelinvel name="velocity" objtype="site" objname="tip"/>
+    <framepos name="goal" objtype="body" objname="goal"/> -->
+    <framepos name="obj_position" objtype="body" objname="object"/>
+    <framequat name="obj_orientation" objtype="body" objname="object"/>
+    <framepos name="goal_position" objtype="body" objname="goal"/>
+    <framequat name="goal_orientation" objtype="body" objname="goal"/>
+  </sensor>
+
+
+</mujoco>
