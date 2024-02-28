@@ -10,6 +10,14 @@
     <motor gear=".1" ctrlrange="-1 1" ctrllimited="true"/>
   </default> -->
 
+  <asset>
+    <mesh file="/home/yinglong/Documents/research/task_motion_planning/infrastructure/motoman_ws/src/pracsys_vbnpm/data/models/objects/ocrtoc/cracker_box/collision_meshes/collision/collision.obj" name="cracker_box_col" scale="1 1 1"/>
+    <mesh file="/home/yinglong/Documents/research/task_motion_planning/infrastructure/motoman_ws/src/pracsys_vbnpm/data/models/objects/ocrtoc/cracker_box/meshes/visual/visual.obj" name="cracker_box_vis" scale="1 1 1"/>
+    <texture file="/home/yinglong/Documents/research/task_motion_planning/infrastructure/motoman_ws/src/pracsys_vbnpm/data/models/objects/ocrtoc/cracker_box/meshes/visual/texture_map.png" name="cracker_box_vis" type="2d"/>
+    <material name="cracker_box_vis" texture="cracker_box_vis"/>
+  </asset>
+
+
   <worldbody>
     <light name="light" pos="0 0 1"/>
     <camera name="fixed" pos="0 0 .75" quat="1 0 0 0"/>
@@ -26,7 +34,28 @@
         <joint name="object_jnt" type="free"/>
     </body>
 
-    <body name="pointmass" pos="0.23 0 .001" gravcomp="1">
+
+    <!-- <body name="object" pos="0.25 0 0.02" quat="1 0 0 0">
+        <geom mesh="cracker_box_col" type="mesh" mass="0.05"/>
+        <geom conaffinity="0" contype="0" material="cracker_box_vis" mesh="cracker_box_vis" type="mesh"/>
+        <joint name="object_jnt" type="free"/>
+    </body> -->
+
+
+
+    <!-- <body name="pointmass" pos="0.1 0 .005" gravcomp="1">
+      <camera name="cam0" pos="0 -0.3 0.3" xyaxes="1 0 0 0 0.7 0.7"/>
+      <joint name="root_x" type="slide"  pos="0 0 0" axis="1 0 0" />
+      <joint name="root_y" type="slide"  pos="0 0 0" axis="0 1 0" />
+      <joint name="root_z" type="slide"  pos="0 0 0" axis="0 0 1" />
+      <geom name="pointmass" type="sphere" size=".005" mass="0.1"/>
+      <site name="tip" pos="0 0 0" size="0.001"/>
+    </body>
+  </worldbody> -->
+
+
+    <!-- 0.22 -->
+    <body name="pointmass" pos="0.22 0 .001" gravcomp="1">
       <camera name="cam0" pos="0 -0.3 0.3" xyaxes="1 0 0 0 0.7 0.7"/>
       <joint name="root_x" type="slide"  pos="0 0 0" axis="1 0 0" />
       <joint name="root_y" type="slide"  pos="0 0 0" axis="0 1 0" />
@@ -37,9 +66,12 @@
   </worldbody>
 
   <actuator>
-    <velocity name="x_vel" joint="root_x" kv="10" ctrllimited="true" ctrlrange="-0.05 0.05"/>
+    <velocity name="x_vel" joint="root_x" kv="10" ctrllimited="true" ctrlrange="-0.1 0.1"/>
+    <velocity name="y_vel" joint="root_y" kv="10" ctrllimited="true" ctrlrange="-0.1 0.1"/>
+    <velocity name="z_vel" joint="root_z" kv="10" ctrllimited="true" ctrlrange="-0.1 0.1"/>
+    <!-- <velocity name="x_vel" joint="root_x" kv="10" ctrllimited="true" ctrlrange="-0.05 0.05"/>
     <velocity name="y_vel" joint="root_y" kv="10" ctrllimited="true" ctrlrange="-0.05 0.05"/>
-    <velocity name="z_vel" joint="root_z" kv="10" ctrllimited="true" ctrlrange="-0.05 0.05"/>
+    <velocity name="z_vel" joint="root_z" kv="10" ctrllimited="true" ctrlrange="-0.05 0.05"/> -->
     <!-- <motor name="x_vel" joint="root_x" gear="1" ctrllimited="true" ctrlrange="-1 1"/>
     <motor name="y_vel" joint="root_y" gear="1" ctrllimited="true" ctrlrange="-1 1"/>
     <motor name="z_vel" joint="root_z" gear="1" ctrllimited="true" ctrlrange="-1 1"/> -->

@@ -78,6 +78,8 @@ add_library(
   tasks/walker/walker.h
   tasks/point_push/point_push.cc
   tasks/point_push/point_push.h
+  tasks/robot_push/robot_push.cc
+  tasks/robot_push/robot_push.h
   planners/planner.cc
   planners/planner.h
   planners/policy.h

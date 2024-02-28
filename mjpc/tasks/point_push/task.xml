@@ -19,7 +19,7 @@
   <custom>
     <!-- agent -->
     <numeric name="agent_planner" data="2" />
-    <numeric name="agent_horizon" data="8" />
+    <numeric name="agent_horizon" data="10" />
     <numeric name="agent_timestep" data="0.01" />
     <numeric name="agent_integrator" data="2" />
     <numeric name="agent_policy_width" data="0.0015" />
@@ -42,6 +42,11 @@
     <body name="goal" mocap="true" pos="0.22 0.02 0.02" quat="0.9553365 0 0 0.2955202">
         <geom type="box" size="0.01 0.03 0.02" contype="0" conaffinity="0" rgba="0 1 0 .5"/>
     </body>
+
+    <!-- <body name="goal" mocap="true" pos="0.22 0.02 0.02" quat="0.9553365 0 0 0.2955202">
+        <geom conaffinity="0" contype="0" material="cracker_box_vis" mesh="cracker_box_vis" type="mesh"/>
+    </body> -->
+
   </worldbody>
 
   <sensor>

@@ -1,0 +1,79 @@
+<mujoco model="RobotPush">
+  <!-- <compiler angle="radian" balanceinertia="true" inertiafromgeom="true" 
+    meshdir="/home/yinglong/Documents/research/task_motion_planning/infrastructure/motoman_ws/src/pracsys_vbnpm/"
+    texturedir="/home/yinglong/Documents/research/task_motion_planning/infrastructure/motoman_ws/src/pracsys_vbnpm/"
+    autolimits="true"/> -->
+  <include file="../common.xml"/>
+  <include file="robot_push.xml"/>
+
+  <!-- <size memory="1M"/> -->
+
+  <custom>
+    <!-- agent -->
+    <numeric name="agent_planner" data="2" />
+    <numeric name="agent_horizon" data="10" />
+    <numeric name="agent_timestep" data="0.01" />
+    <numeric name="agent_integrator" data="2" />
+    <numeric name="agent_policy_width" data="0.0015" />
+    <numeric name="sampling_spline_points" data="15" />
+    <numeric name="sampling_exploration" data="0.05" />
+    <numeric name="gradient_spline_points" data="15" />
+
+    <!-- estimator -->
+    <numeric name="estimator" data="0" />
+    <numeric name="estimator_sensor_start" data="2" />
+    <numeric name="estimator_number_sensor" data="8" />
+    <numeric name="estimator_timestep" data="0.0075" />
+    <numeric name="batch_configuration_length" data="3" />
+    <numeric name="batch_scale_prior" data="1.0e-3" />
+  </custom>
+
+  <statistic extent="1.5" center="0.1 0.2 0.3"/>
+
+<!-- 
+  <default>
+    <geom solref=".001 1"/>
+  </default> -->
+
+  <worldbody>
+    <body name="goal" mocap="true" pos="0.8599660902822591 -0.18971188968363312 1.04" quat="0.9999876884441344 -0.003640889346286578 -0.003226259955834315 0.000978841980307978">
+      <geom type="box" conaffinity="0" contype="0" size="0.02 0.06 0.04" rgba="0 1 0 .5"/>
+    </body>
+  </worldbody>
+
+  <!-- <contact>
+    <exclude body1="world" body2="left_finger"/>
+    <exclude body1="world" body2="right_finger"/>
+    <exclude body1="left_finger" body2="right_finger"/>
+  </contact> -->
+
+  <sensor>
+    <!-- Residual 0-2: distance from robot hand to the object -->
+    <user name="Control" dim="15" user="2 0.1 0 5 0.01"/>
+    <user name="Torso Position" dim="1" user="2 0.1 0 5 0.01"/>
+    <user name="Right Arm Position" dim="7" user="2 0.1 0 5 0.01"/>
+
+    <user name="Reach" dim="3" user="2 0.1 0 5 0.01"/>
+
+    <!-- Residual 3-5: object position to goal -->
+    <user name="Object Position" dim="3" user="2 1 0 5 0.01"/>
+    <!-- Residual 6-8: object orientation to goal -->
+    <user name="Object Orientation" dim="3" user="2 1 0 5 0.01"/>
+
+    <framepos name="hand_position" objtype="site" objname="eeff"/>
+    <framequat name="hand_quat" objtype="site" objname="eeff"/>
+    <framepos name="obj_position" objtype="body" objname="object"/>
+    <framequat name="obj_orientation" objtype="body" objname="object"/>
+    <framepos name="goal_position" objtype="body" objname="goal"/>
+    <framequat name="goal_orientation" objtype="body" objname="goal"/>
+<!-- 
+    <framepos name="box1" objtype="site" objname="box1"/>
+    <framepos name="box2" objtype="site" objname="box2"/>
+    <framepos name="target" objtype="geom" objname="target"/>
+    <framepos name="target1" objtype="site" objname="target1"/>
+    <framepos name="target2" objtype="site" objname="target2"/>
+    <framepos name="trace0" objtype="site" objname="touch_left"/>
+    <framepos name="trace1" objtype="site" objname="touch_right"/> -->
+  </sensor>
+
+</mujoco>
